@@ -11,10 +11,9 @@ class BFS:
         """ YOUR CODE HERE """
         self.visited.clear()
         match_found = False
-        counter = 0
         depth = 0
         while len(self.queue) != 0:
-            counter = counter + 1
+            self.counter = self.counter + 1
             candidate_node = self.queue.pop()
             depth = candidate_node.step
             if candidate_node.is_equal(target):
@@ -32,4 +31,4 @@ class BFS:
         # a: bool (match found or not)
         # b: int (counter)
         # c: int (depth)
-        return match_found, counter, depth
+        return match_found, self.counter, depth
