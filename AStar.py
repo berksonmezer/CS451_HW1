@@ -11,12 +11,28 @@ class AStar:
 
     def run(self, target):
         """ YOUR CODE HERE """
+        self.queue.put(self.root)
+        match_found = False
+        while not self.queue.empty():
+            self.counter = self.counter + 1
+            current_node = self.queue.get()
+            self.visited[current_node.UID] = current_node
+            depth = current_node.step
+            if current_node.is_equal(target):
+                match_found = True
+                break
+
+            children_nodes_list = self.graph.reveal_neighbors(current_node)
+            for child_node in children_nodes_list:
+                if self.visited.get(child_node.UID) is None:
+                    priority_number = self.manhattan_distance(current_node, target) + current_node.step
+                    self.queue.put(child_node, priority_number)
 
         # return 3 items
         # a: bool (match found or not)
         # b: int (counter)
         # c: int (depth)
-        return False, 0, 0
+        return match_found, self.counter, depth
 
     def manhattan_distance(self, node, end):
         arr = [0] * (self.graph.size + 1)
