@@ -8,7 +8,7 @@ class UCS:
         self.queue = Q.PriorityQueue()
         self.counter = 0
         self.visited[root.UID] = root
-        self.queue.put((root.UID, root, root.step))
+        self.queue.put((root.step, root, int(root.UID)))
 
     def run(self, target):
         """ YOUR CODE HERE """
@@ -26,7 +26,7 @@ class UCS:
             for child_node in children_nodes_list:
                 if self.visited.get(child_node.UID) is None:
                     priority_number = current_node.step
-                    self.queue.put((child_node.UID, child_node, priority_number))
+                    self.queue.put((priority_number, child_node, int(child_node.UID)))
 
         # return 3 items
         # a: bool (match found or not)
